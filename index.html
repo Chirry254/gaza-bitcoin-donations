@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaza Lives Matter - Humanitarian Donations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .symbol {
+            font-size: 48px;
+            opacity: 0.9;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .location {
+            font-size: 1rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        .donation-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .donation-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .bitcoin-logo {
+            font-size: 4rem;
+            color: #f7931a;
+            margin-bottom: 15px;
+            display: block;
+            text-shadow: 0 0 20px rgba(247, 147, 26, 0.5);
+        }
+
+        .donation-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #f7931a;
+        }
+
+        .address-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid rgba(247, 147, 26, 0.3);
+        }
+
+        .address-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .btc-address {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #f7931a;
+            word-break: break-all;
+            text-align: center;
+            padding: 10px;
+            background: rgba(247, 147, 26, 0.1);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(45deg, #f7931a, #ffb347);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(247, 147, 26, 0.3);
+        }
+
+        .quick-donate {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .amount-btn {
+            background: rgba(0, 180, 216, 0.2);
+            border: 2px solid #00b4d8;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .amount-btn:hover {
+            background: rgba(0, 180, 216, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 180, 216, 0.3);
+        }
+
+        .donation-steps {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .steps-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #00ff88;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .step-number {
+            background: #00ff88;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            border: 3px solid #f7931a;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            color: #888;
+        }
+
+        .security-note {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ffc107;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00ff88;
+            color: #000;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .appreciation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .appreciation-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .appreciation-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .appreciation-modal.show .appreciation-content {
+            transform: scale(1);
+        }
+
+        .appreciation-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .appreciation-title {
+            font-size: 2rem;
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .appreciation-message {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .close-modal {
+            background: linear-gradient(45deg, #00ff88, #00b4d8);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 20px;
+            animation: floatUp 3s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .donation-card {
+                padding: 20px;
+            }
+            
+            .symbol {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <span class="symbol">☪️</span>
+                <span class="symbol">❤️</span>
+                <span class="symbol">🕊️</span>
+            </div>
+            <h1 class="main-title">Gaza Lives Matter</h1>
+            <p class="subtitle">Humanitarian Bitcoin Donations</p>
+            <p class="location">Abu Dhabi, UAE</p>
+        </header>
+
+        <div class="donation-card">
+            <div class="donation-header">
+                <div class="bitcoin-logo">₿</div>
+                <h2 class="donation-title">Support Our Cause</h2>
+                <p>Your Bitcoin donation helps provide humanitarian aid and support to those in need.</p>
+            </div>
+
+            <div class="address-container">
+                <div class="address-label">Bitcoin Donation Address:</div>
+                <div class="btc-address" id="btcAddress">bc1qjrhku4yrvnrys7jq6532ar5a6m96k2mg8gwxx2</div>
+                <button class="copy-btn" onclick="copyAddress()">📋 Copy Address</button>
+            </div>
+
+            <div class="quick-donate">
+                <div class="amount-btn" onclick="selectAmount('0.001')">0.001 BTC</div>
+                <div class="amount-btn" onclick="selectAmount('0.005')">0.005 BTC</div>
+                <div class="amount-btn" onclick="selectAmount('0.01')">0.01 BTC</div>
+                <div class="amount-btn" onclick="selectAmount('0.05')">0.05 BTC</div>
+            </div>
+
+            <div class="qr-container">
+                <img id="qrCode" src="" alt="Bitcoin QR Code" style="width: 200px; height: 200px; border-radius: 15px; border: 3px solid #f7931a; background: white; padding: 10px; margin: 20px auto; display: block;">
+                <p style="text-align: center; color: #ccc; margin-top: 10px;">Scan with your Bitcoin wallet</p>
+            </div>
+
+            <div class="security-note">
+                <strong>⚠️ Security Notice:</strong> Always verify the donation address before sending. This address is: bc1qjrhku4yrvnrys7jq6532ar5a6m96k2mg8gwxx2
+            </div>
+        </div>
+
+        <div class="donation-steps">
+            <h3 class="steps-title">How to Donate Bitcoin</h3>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Open your Bitcoin wallet app (Coinbase, Binance, Trust Wallet, etc.)</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Click "Send" or "Transfer" Bitcoin</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Copy our donation address or scan the QR code above</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>Enter the amount you wish to donate</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">5</div>
+                <div>Confirm and send your donation</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">6</div>
+                <div>Thank you for your humanitarian support! 🙏</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>🕊️ Every donation makes a difference in supporting humanitarian causes 🕊️</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                Gaza Lives Matter | Abu Dhabi, UAE | Bitcoin Donations Platform
+            </p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        Address copied to clipboard!
+    </div>
+
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="appreciation-modal" id="appreciationModal">
+        <div class="appreciation-content">
+            <div class="appreciation-icon" id="appreciationIcon">🤲</div>
+            <h2 class="appreciation-title" id="appreciationTitle">Thank You!</h2>
+            <p class="appreciation-message" id="appreciationMessage">
+                Your compassion and generosity bring hope to those in need. 
+                May Allah bless your kind heart and generous spirit.
+            </p>
+            <button class="close-modal" onclick="closeAppreciationModal()">Continue ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        const btcAddress = 'bc1qjrhku4yrvnrys7jq6532ar5a6m96k2mg8gwxx2';
+        
+        const appreciationMessages = [
+            {
+                icon: '🤲',
+                title: 'Barakallahu feek!',
+                message: 'Your compassion and generosity bring hope to those in need. May Allah bless your kind heart and generous spirit.'
+            },
+            {
+                icon: '❤️',
+                title: 'Thank You for Caring!',
+                message: 'Your donation shows the beautiful humanity that unites us all. Together, we make a difference for Gaza.'
+            },
+            {
+                icon: '🕊️',
+                title: 'Peace & Blessings!',
+                message: 'Your kindness spreads like ripples of hope. Thank you for standing with humanity and supporting those in need.'
+            },
+            {
+                icon: '🌟',
+                title: 'You Are a Light!',
+                message: 'In times of darkness, your generosity shines bright. Your donation helps restore dignity and hope.'
+            },
+            {
+                icon: '🙏',
+                title: 'Deeply Grateful!',
+                message: 'From the bottom of our hearts, thank you. Your support means everything to families who need help.'
+            }
+        ];
+        
+        function getRandomAppreciation() {
+            return appreciationMessages[Math.floor(Math.random() * appreciationMessages.length)];
+        }
+        
+        function showAppreciationModal() {
+            const appreciation = getRandomAppreciation();
+            
+            document.getElementById('appreciationIcon').textContent = appreciation.icon;
+            document.getElementById('appreciationTitle').textContent = appreciation.title;
+            document.getElementById('appreciationMessage').textContent = appreciation.message;
+            
+            document.getElementById('appreciationModal').classList.add('show');
+            createFloatingHearts();
+        }
+        
+        function closeAppreciationModal() {
+            document.getElementById('appreciationModal').classList.remove('show');
+        }
+        
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const heartSymbols = ['❤️', '🤲', '🕊️', '💚', '✨'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heartsContainer.removeChild(heart);
+                    }, 3000);
+                }, i * 200);
+            }
+        }
+        
+        function copyAddress() {
+            navigator.clipboard.writeText(btcAddress).then(function() {
+                showNotification('Address copied! 📋 Ready to donate');
+                setTimeout(showAppreciationModal, 1000);
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = btcAddress;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Address copied! 📋 Ready to donate');
+                setTimeout(showAppreciationModal, 1000);
+            });
+        }
+        
+        function showNotification(message = 'Address copied to clipboard!') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function selectAmount(amount) {
+            // Create bitcoin payment URL
+            const paymentUrl = `bitcoin:${btcAddress}?amount=${amount}&label=Gaza Lives Matter Donation&message=Humanitarian Aid`;
+            
+            // Try to open with bitcoin wallet
+            window.location.href = paymentUrl;
+            
+            // Show appreciation immediately
+            showAppreciationModal();
+            
+            // Also copy address for manual entry
+            setTimeout(() => {
+                navigator.clipboard.writeText(btcAddress);
+                showNotification(`${amount} BTC selected! 💰 Address copied too`);
+            }, 2000);
+        }
+        
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const symbols = document.querySelectorAll('.symbol');
+            symbols.forEach((symbol, index) => {
+                symbol.style.animationDelay = `${index * 0.5}s`;
+            });
+            
+            // Generate QR code for Bitcoin address
+            generateQRCode();
+            
+            // Add QR code click appreciation
+            document.getElementById('qrCode').addEventListener('click', function() {
+                showAppreciationModal();
+                showNotification('QR Code ready to scan! 📱');
+            });
+        });
+        
+        function generateQRCode() {
+            const bitcoinUri = `bitcoin:${btcAddress}?label=Gaza Lives Matter Donation&message=Humanitarian Aid`;
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(bitcoinUri)}`;
+            const qrImg = document.getElementById('qrCode');
+            qrImg.src = qrApiUrl;
+            qrImg.style.cursor = 'pointer';
+            qrImg.title = 'Click for appreciation message!';
+        }
+    </script>
+</body>
+</html>
